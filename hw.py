@@ -5,12 +5,14 @@ SH = 400
 MS = 5
 FS = 72
 pygame.init()
+screen = pygame.display.set_mode((SW, SH))
+pygame.display.set_caption("Collision Sprites")
 bg = pygame.transform.scale(pygame.image.load("bg.hw.jpg"), (SW, SH))
 font = pygame.font.SysFont("Times New Roman", FS)
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, image_file):
         super().__init__()
-        self.image = pygame.image.load(image_file).convert_alpha()
+        self.image = pygame.image.load(image_file)
         self.rect = self.image.get_rect()
     def move(self, x_change, y_change):
         self.rect.x = max(min(self.rect.x + x_change, SW - self.rect.width), 0)
@@ -24,8 +26,6 @@ sp2 = Sprite("bunny.jpg")
 sp2.rect.x = random.randint(0, SW - sp2.rect.width)
 sp2.rect.y = random.randint(0, SH - sp2.rect.height)
 all_sprites.add(sp2)
-screen = pygame.display.set_mode((SW, SH))
-pygame.display.set_caption("Collision Sprites")
 running = True
 won = False
 clock = pygame.time.Clock()
